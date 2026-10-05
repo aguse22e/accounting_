@@ -1,0 +1,73 @@
+/* Ledger Trial specific styles */
+.ledger-content-wrapper {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding: 1.5rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+}
+
+.ledger-card {
+    width: 100% !important;
+    margin: 0 !important;
+    box-sizing: border-box;
+}
+
+.ledger-table-wrapper {
+    width: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: auto !important;
+    margin: 0 !important;
+    box-sizing: border-box;
+}
+
+.ledger-table-wrapper table {
+    width: 100% !important;
+    margin: 0 !important;
+    min-width: 100% !important;
+}
+
+.content-wrapper {
+    padding: 1.5rem;
+}
+
+.card {
+    border-radius: 0.5rem;
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+}
+
+.card-header {
+    background: linear-gradient(90deg, rgba(30,60,114,.06), rgba(42,157,143,.06), rgba(123,44,191,.06));
+    border-bottom: 1px solid #e3e6f0;
+    border-radius: 0.5rem 0.5rem 0 0 !important;
+    padding: 1rem 1.5rem;
+}
+
+.table-bordered {
+    border: 1px solid #dee2e6;
+}
+
+.table-bordered th,
+.table-bordered td {
+    border: 1px solid #dee2e6;
+}
+
+.table thead {
+    background-color: #fdebd3;
+}
+
+.table tfoot {
+    background-color: #f8f9fa;
+}
+
+.text-end {
+    text-align: right;
+}
+
+.alert {
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+}
+

@@ -1,0 +1,161 @@
+/* Management specific styles */
+.content-wrapper {
+    padding: 1.5rem !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+}
+
+/* Custom Tab Navigation Styles */
+#managementTabs {
+    border-bottom: none;
+    background: transparent;
+    padding: 0;
+    margin-bottom: 1.5rem !important;
+}
+
+#managementTabs .nav-item {
+    margin-right: 0.5rem;
+}
+
+#managementTabs .nav-link {
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    color: #007bff;
+    font-weight: 500;
+    background: transparent;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+#managementTabs .nav-link:hover {
+    color: #0056b3;
+    background: rgba(0, 123, 255, 0.1);
+}
+
+#managementTabs .nav-link.active {
+    background-color: #e9ecef;
+    color: #333333;
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#managementTabs .nav-link i {
+    margin-right: 0.5rem;
+}
+
+.card {
+    border-radius: 0.5rem;
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    width: 100% !important;
+    margin: 0 !important;
+    box-sizing: border-box;
+}
+
+.card-header {
+    background: linear-gradient(90deg, rgba(30,60,114,.06), rgba(42,157,143,.06), rgba(123,44,191,.06));
+    border-bottom: 1px solid #e3e6f0;
+    border-radius: 0.5rem 0.5rem 0 0 !important;
+    padding: 1rem 1.5rem;
+}
+
+.table-responsive {
+    max-height: 600px;
+    overflow-y: auto;
+    overflow-x: auto;
+    width: 100% !important;
+    margin: 0 !important;
+    box-sizing: border-box;
+}
+
+.table {
+    width: 100% !important;
+    margin: 0 !important;
+    table-layout: auto;
+}
+
+.table thead th {
+    position: sticky;
+    top: 0;
+    background-color: #f8f9fa;
+    z-index: 10;
+}
+
+.table-bordered {
+    border: 1px solid #dee2e6;
+}
+
+.table-bordered th,
+.table-bordered td {
+    border: 1px solid #dee2e6;
+}
+
+.table-success {
+    background-color: #d1e7dd;
+    transition: background-color 0.5s ease;
+}
+
+.modal-body .form-label {
+    font-weight: 500;
+}
+
+.form-text {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+
+/* Button Styles */
+.btn-primary {
+    background: linear-gradient(135deg, #8B5CF6, #EC4899, #3B82F6);
+    border: 0;
+    box-shadow: 0 8px 20px rgba(139,92,246,.35);
+    border-radius: 0.35rem;
+    padding: 0.5rem 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(139,92,246,.45);
+}
+
+.btn-outline-secondary {
+    background-color: #fff;
+    border-color: #d0d0d0;
+    color: #333;
+    border-radius: 6px;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #f8f9fa;
+    border-color: #adb5bd;
+    transform: translateY(-1px);
+}
+
+/* Form Input Styles */
+.form-control {
+    border-radius: 0.35rem;
+    border: 1px solid #ced4da;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #8B5CF6;
+    box-shadow: 0 0 0 0.2rem rgba(139, 92, 246, 0.25);
+}
+
+.form-label {
+    font-weight: 500;
+    color: #495057;
+    font-size: 0.875rem;
+}
+

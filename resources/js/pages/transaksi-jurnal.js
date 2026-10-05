@@ -1,0 +1,2 @@
+// Transaksi Jurnal specific JavaScript
+

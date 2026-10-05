@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API Project & Budget</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; }
+        button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+        pre { background: #f5f5f5; padding: 10px; overflow-x: auto; }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Test API Project & Budget</h1>
+    
+    <div class="section">
+        <h2>Test GET /api/project</h2>
+        <button onclick="testGetProjects()">Test Get Projects</button>
+        <pre id="project-result"></pre>
+    </div>
+    
+    <div class="section">
+        <h2>Test GET /api/budget</h2>
+        <button onclick="testGetBudgets()">Test Get Budgets</button>
+        <pre id="budget-result"></pre>
+    </div>
+
+    <script>
+        async function testGetProjects() {
+            const resultEl = document.getElementById('project-result');
+            resultEl.textContent = 'Loading...';
+            
+            try {
+                const response = await fetch('/api/project', {
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    credentials: 'same-origin'
+                });
+                
+                const data = await response.json();
+                resultEl.className = response.ok ? 'success' : 'error';
+                resultEl.textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                resultEl.className = 'error';
+                resultEl.textContent = 'Error: ' + error.message;
+            }
+        }
+
+        async function testGetBudgets() {
+            const resultEl = document.getElementById('budget-result');
+            resultEl.textContent = 'Loading...';
+            
+            try {
+                const response = await fetch('/api/budget', {
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    credentials: 'same-origin'
+                });
+                
+                const data = await response.json();
+                resultEl.className = response.ok ? 'success' : 'error';
+                resultEl.textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                resultEl.className = 'error';
+                resultEl.textContent = 'Error: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>

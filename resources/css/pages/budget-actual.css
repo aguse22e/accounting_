@@ -1,0 +1,44 @@
+.empty-state {
+    padding: 2rem;
+}
+
+.empty-state i {
+    opacity: 0.5;
+}
+
+.data-updated {
+    background-color: #d4edda !important;
+    transition: background-color 0.5s ease;
+}
+
+.data-updated.fade-out {
+    background-color: transparent !important;
+}
+
+/* Active Button Styles */
+.btn.filter-active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    border-color: #667eea !important;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4) !important;
+    transform: translateY(-2px) !important;
+    transition: all 0.3s ease !important;
+}
+
+.btn.filter-active:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.5) !important;
+}
+
+.btn.filter-active i {
+    color: white !important;
+}
+
+.btn-primary.filter-active,
+#filterBtn.filter-active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    border-color: #667eea !important;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4) !important;
+}
+

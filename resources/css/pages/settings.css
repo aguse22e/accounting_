@@ -1,0 +1,47 @@
+/* Settings specific styles */
+.container {
+    max-width: 600px;
+}
+
+.card {
+    border-radius: 0.5rem;
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+}
+
+.card-header {
+    background: linear-gradient(90deg, rgba(30,60,114,.06), rgba(42,157,143,.06), rgba(123,44,191,.06));
+    border-bottom: 1px solid #e3e6f0;
+    border-radius: 0.5rem 0.5rem 0 0 !important;
+    padding: 1rem 1.5rem;
+    font-weight: 600;
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+.form-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #8B5CF6, #EC4899, #3B82F6);
+    border: 0;
+    box-shadow: 0 8px 20px rgba(139,92,246,.35);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(139,92,246,.4);
+}
+
+.text-danger {
+    color: #dc3545 !important;
+}
+
+.text-muted {
+    color: #6c757d !important;
+}
+
