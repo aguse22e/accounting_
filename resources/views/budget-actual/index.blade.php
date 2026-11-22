@@ -265,8 +265,8 @@
     </div>
 </div>
 
-<script id="summaryDataJson" type="application/json">{!! json_encode($budgetActualData['summary'] ?? null) !!}</script>
-<script id="initialDataJson" type="application/json">{!! json_encode($budgetActualData ?? null) !!}</script>
+<script id="summaryDataJson" type="application/json">@json($budgetActualData['summary'] ?? null)</script>
+<script id="initialDataJson" type="application/json">@json($budgetActualData ?? null)</script>
 @vite(['resources/js/pages/budget-actual.js'])
 <script>
     // Pass Blade variables to JavaScript

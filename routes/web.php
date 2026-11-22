@@ -40,7 +40,7 @@ Route::get('/', function () {
 
 // autentikasi (login/logout)
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [LoginController::class, 'login'])->name('login.attempt');
+Route::post('/login', [LoginController::class, 'login'])->middleware('throttle:5,1')->name('login.attempt');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Pembaruan pengaturan profil
@@ -51,7 +51,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['au
 
 // menu master (Akun, Project, Budget) - tidak untuk manager
 Route::middleware(['auth'])->group(function () {
-    Route::get('/master/akuntansi', function() { return redirect()->route('master.akun'); });
+    Route::get('/master/akuntansi', function() { return redirect()->route('master.akun'); })->name('master.akuntansi');
     Route::get('/master/akun', function() { return view('management'); })->name('master.akun');
     Route::get('/master/akun/{id}/edit', function($id) { 
         return view('master.akun.edit', ['id' => $id]); 
@@ -248,22 +248,6 @@ Route::prefix('trial-balance')->middleware(['auth'])->group(function () {
     Route::get('/export-excel', [TrialBalanceController::class, 'exportExcel'])->name('trial-balance.export-excel');
 });
 
-// AUTO LOGIN - untuk testing jurnal
-Route::get('quick-login', function () {
-    $user = \App\Models\User::where('email', 'superadmin@accounting.system')->first();
-    if ($user) {
-        Auth::login($user);
-        session()->regenerate();
-        return redirect('/transaksi/jurnal');
-    }
-    return 'User not found';
-});
-
-// TEST - Simple route untuk debugging
-Route::get('test-simple', function () {
-    return 'Simple route works!';
-});
-
 // Catatan: JurnalController menggunakan model JournalEntry (Double Entry System) - tidak untuk manager
 Route::middleware(['auth', 'cache.headers:private;no_store;max_age=0'])->group(function () {
     Route::get('transaksi/printpdf', [TransaksiController::class, 'printPdf'])->name('transaksi.printpdf');
@@ -318,12 +302,12 @@ Route::middleware(['auth', 'cache.headers:private;no_store;max_age=0'])->group(f
 // API routes for project CRUD (using web middleware for session auth) - tidak untuk manager
 Route::prefix('api')->middleware(['auth'])->group(function () {
     // Akun CRUD routes
-    Route::get('/akun', [AkunController::class, 'index']);
-    Route::get('/akun/{id}', [AkunController::class, 'show']);
-    Route::get('/akun-by-kode/{kode}', [AkunController::class, 'getByKode']);
-    Route::post('/akun', [AkunController::class, 'store']);
-    Route::put('/akun/{id}', [AkunController::class, 'update']);
-    Route::delete('/akun/{id}', [AkunController::class, 'destroy']);
+    Route::get('/akun', [AkunController::class, 'index'])->name('api.akun.index');
+    Route::get('/akun/{id}', [AkunController::class, 'show'])->name('api.akun.show');
+    Route::get('/akun-by-kode/{kode}', [AkunController::class, 'getByKode'])->name('api.akun.by-kode');
+    Route::post('/akun', [AkunController::class, 'store'])->name('api.akun.store');
+    Route::put('/akun/{id}', [AkunController::class, 'update'])->name('api.akun.update');
+    Route::delete('/akun/{id}', [AkunController::class, 'destroy'])->name('api.akun.destroy');
     
     // Management data aggregator for management.blade.php
     Route::get('/management-data', function () {
@@ -357,7 +341,7 @@ Route::prefix('api')->middleware(['auth'])->group(function () {
                 'message' => 'Gagal memuat data: ' . $e->getMessage(),
             ], 500);
         }
-    });
+    })->name('api.management-data');
     Route::get('/project', function () {
         $projects = Project::orderBy('created_at', 'desc')
                           ->orderBy('tanggal', 'desc')
@@ -380,7 +364,7 @@ Route::prefix('api')->middleware(['auth'])->group(function () {
                 'updated_at' => $p->updated_at,
             ];
         }));
-    });
+    })->name('api.project.index');
 
     Route::post('/project', function (Request $request) {
         $validated = $request->validate([
@@ -444,7 +428,7 @@ Route::prefix('api')->middleware(['auth'])->group(function () {
         ];
         
         return response()->json(['success' => true, 'message' => 'Project berhasil ditambahkan', 'data' => $responseData]);
-    });
+    })->name('api.project.store');
 
     Route::put('/project/{kode}', function (Request $request, $kode) {
         $p = Project::where('kode_project', $kode)->first();
@@ -533,7 +517,7 @@ Route::prefix('api')->middleware(['auth'])->group(function () {
         }
         
         return response()->json(['success'=>true,'message'=>'Project diperbarui','data'=>$responseData]);
-    });
+    })->name('api.project.update');
 
     Route::delete('/project/{kode}', function ($kode) {
         $p = Project::where('kode_project', $kode)->first();
@@ -549,7 +533,7 @@ Route::prefix('api')->middleware(['auth'])->group(function () {
         }
         
         return response()->json(['success'=>true,'message'=>'Project dihapus']);
-    });
+    })->name('api.project.destroy');
 
     // Budget CRUD API routes
     Route::get('/budget', function () {
@@ -585,7 +569,7 @@ Route::prefix('api')->middleware(['auth'])->group(function () {
                 'message' => 'Gagal memuat data budget: ' . $e->getMessage()
             ], 500);
         }
-    });
+    })->name('api.budget.index');
 
     Route::post('/budget', function (Request $request) {
         if (!Schema::hasTable('budget')) {
@@ -646,7 +630,7 @@ Route::prefix('api')->middleware(['auth'])->group(function () {
                 'tanggal' => $b->tanggal ?? null,
             ]
         ]);
-    });
+    })->name('api.budget.store');
 
     Route::put('/budget/{kode}', function (Request $request, $kode) {
         if (!Schema::hasTable('budget')) {
@@ -742,7 +726,7 @@ Route::prefix('api')->middleware(['auth'])->group(function () {
                 'tanggal' => $updated->tanggal ?? null,
             ]
         ]);
-    });
+    })->name('api.budget.update');
 
     Route::delete('/budget/{kode}', function ($kode) {
         if (!Schema::hasTable('budget')) {
@@ -765,5 +749,5 @@ Route::prefix('api')->middleware(['auth'])->group(function () {
         }
         
         return response()->json(['success'=>true,'message'=>'Budget dihapus']);
-    });
+    })->name('api.budget.destroy');
 });

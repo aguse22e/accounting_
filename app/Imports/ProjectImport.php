@@ -64,7 +64,7 @@ class ProjectImport implements ToModel, WithHeadingRow, WithValidation, SkipsOnF
             return $project;
         } catch (\Exception $e) {
             $this->skipped++;
-            $this->errors[] = $e->getMessage();
+            $this->errors[] = 'Terjadi kesalahan saat memproses baris ini.';
             return null;
         }
     }

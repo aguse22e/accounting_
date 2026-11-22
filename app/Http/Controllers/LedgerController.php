@@ -136,7 +136,7 @@ class LedgerController extends Controller
             }
         } catch (\Exception $e) {
             Log::error('Excel Export Error: ' . $e->getMessage());
-            return back()->with('error', 'Failed to generate Excel: ' . $e->getMessage());
+            return back()->with('error', 'Gagal membuat file Excel.');
         }
     }
 
@@ -254,7 +254,7 @@ class LedgerController extends Controller
             DB::commit();
         } catch (\Throwable $e) {
             DB::rollBack();
-            return back()->with('error', 'Gagal mengimpor: ' . $e->getMessage());
+            return back()->with('error', 'Gagal mengimpor file.');
         }
 
         return back()->with('success', "Impor selesai. Tersimpan: {$created}, dilewati: {$skipped}. File: " . basename($storedPath))
@@ -904,7 +904,7 @@ class LedgerController extends Controller
                 'to' => $to,
                 'trace' => $e->getTraceAsString()
             ]);
-            return back()->with('error', 'Failed to load General Ledger Detail: ' . $e->getMessage());
+            return back()->with('error', 'Gagal memuat rincian buku besar.');
         }
     }
 
@@ -1594,7 +1594,7 @@ class LedgerController extends Controller
                 'to' => $to,
                 'trace' => $e->getTraceAsString()
             ]);
-            return back()->with('error', 'Failed to generate PDF: ' . $e->getMessage());
+            return back()->with('error', 'Gagal membuat file PDF.');
         }
     }
 
@@ -1733,7 +1733,7 @@ class LedgerController extends Controller
                 'to' => $to,
                 'trace' => $e->getTraceAsString()
             ]);
-            return back()->with('error', 'Failed to generate Cash Flows PDF: ' . $e->getMessage());
+            return back()->with('error', 'Gagal membuat file PDF arus kas.');
         }
     }
 
