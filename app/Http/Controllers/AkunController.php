@@ -72,7 +72,8 @@ class AkunController extends Controller
                 'errors' => $e->errors()
             ], 422);
         } catch (\Throwable $e) {
-            return response()->json(['success' => false, 'message' => $e->getMessage()], 422);
+            report($e);
+            return response()->json(['success' => false, 'message' => 'Terjadi kesalahan.'], 422);
         }
     }
 
@@ -148,9 +149,10 @@ class AkunController extends Controller
                 'errors' => $e->errors()
             ], 422);
         } catch (\Throwable $e) {
+            report($e);
             return response()->json([
                 'success' => false, 
-                'message' => $e->getMessage(),
+                'message' => 'Terjadi kesalahan.',
                 'errors' => []
             ], 422);
         }
@@ -173,7 +175,8 @@ class AkunController extends Controller
             
             return response()->json(['success' => true, 'message' => 'Akun berhasil dihapus']);
         } catch (\Throwable $e) {
-            return response()->json(['success' => false, 'message' => $e->getMessage()], 422);
+            report($e);
+            return response()->json(['success' => false, 'message' => 'Terjadi kesalahan.'], 422);
         }
     }
 

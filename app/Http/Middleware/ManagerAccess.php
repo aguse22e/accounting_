@@ -41,12 +41,18 @@ class ManagerAccess
                 'ledger.statement-of-activity.export-excel',
                 'logout',
                 'settings.update',
+                'api.akun.index',
+                'api.akun.show',
+                'api.akun.by-kode',
+                'api.management-data',
+                'api.project.index',
+                'api.budget.index',
             ];
             
             $currentRoute = $request->route() ? $request->route()->getName() : null;
             
-            // Jika route tidak diizinkan, redirect ke ledger
-            if ($currentRoute !== null && !in_array($currentRoute, $allowedRoutes)) {
+            // Jika route tidak diizinkan (termasuk route tanpa nama), redirect ke ledger
+            if (!in_array($currentRoute, $allowedRoutes, true)) {
                 return redirect()->route('ledger.index')->with('error', 'Akses ditolak. Anda hanya dapat mengakses halaman Ledger.');
             }
         }

@@ -143,14 +143,15 @@ class JurnalController extends Controller
             return redirect()->route('transaksi.index', ['tab' => 'jurnal'])->with('success', 'Jurnal berhasil ditambahkan.');
 
         } catch (\Exception $e) {
+            report($e);
             if ($request->ajax() || $request->wantsJson()) {
                 return response()->json([
                     'success' => false,
-                    'message' => $e->getMessage(),
+                    'message' => 'Terjadi kesalahan.',
                 ], 422);
             }
 
-            return back()->withInput()->withErrors(['error' => $e->getMessage()]);
+            return back()->withInput()->withErrors(['error' => 'Terjadi kesalahan.']);
         }
     }
 
@@ -303,8 +304,9 @@ class JurnalController extends Controller
                 ->with('success', 'Jurnal berhasil diperbarui.');
 
         } catch (\Exception $e) {
+            report($e);
             \DB::rollBack();
-            return back()->withInput()->withErrors(['error' => $e->getMessage()]);
+            return back()->withInput()->withErrors(['error' => 'Terjadi kesalahan.']);
         }
     }
 
@@ -341,7 +343,8 @@ class JurnalController extends Controller
             return redirect()->route('transaksi.index', ['tab' => 'jurnal'])->with('success', 'Journal entry posted to general ledger successfully.');
 
         } catch (\Exception $e) {
-            return back()->withErrors(['error' => $e->getMessage()]);
+            report($e);
+            return back()->withErrors(['error' => 'Terjadi kesalahan.']);
         }
     }
 
@@ -364,7 +367,8 @@ class JurnalController extends Controller
             return redirect()->route('transaksi.index', ['tab' => 'jurnal'])->with('success', 'Journal entry reversed successfully.');
 
         } catch (\Exception $e) {
-            return back()->withErrors(['error' => $e->getMessage()]);
+            report($e);
+            return back()->withErrors(['error' => 'Terjadi kesalahan.']);
         }
     }
 
@@ -407,7 +411,8 @@ class JurnalController extends Controller
             return back()->with('success', 'Journal line deleted successfully.');
 
         } catch (\Exception $e) {
-            return back()->withErrors(['error' => $e->getMessage()]);
+            report($e);
+            return back()->withErrors(['error' => 'Terjadi kesalahan.']);
         }
     }
 
@@ -493,7 +498,8 @@ class JurnalController extends Controller
                 ->with('success', 'Journal line updated successfully.');
 
         } catch (\Exception $e) {
-            return back()->withInput()->withErrors(['error' => $e->getMessage()]);
+            report($e);
+            return back()->withInput()->withErrors(['error' => 'Terjadi kesalahan.']);
         }
     }
 
@@ -627,9 +633,10 @@ class JurnalController extends Controller
             return response()->json($result);
 
         } catch (\Exception $e) {
+            report($e);
             return response()->json([
                 'valid' => false,
-                'errors' => [$e->getMessage()],
+                'errors' => ['Terjadi kesalahan.'],
                 'total_debit' => 0,
                 'total_credit' => 0,
                 'balance_status' => 'Not Balanced',
@@ -696,12 +703,13 @@ class JurnalController extends Controller
             ]);
 
         } catch (\Exception $e) {
+            report($e);
             return response()->json([
                 'total_debit' => 0,
                 'total_credit' => 0,
                 'balance_status' => 'Not Balanced',
                 'difference' => 0,
-                'error' => $e->getMessage(),
+                'error' => 'Terjadi kesalahan.',
             ], 500);
         }
     }
